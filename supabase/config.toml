@@ -1,0 +1,27 @@
+# Minimal Supabase CLI config so `supabase start` / `supabase db reset` work locally.
+# Run `supabase init` yourself if you want the full commented file; this one is enough.
+project_id = "labour-chowk"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173"]
+
+[auth.email]
+# For the demo, new accounts can sign in immediately. Turn this ON in production.
+enable_confirmations = false
+
+[storage]
+enabled = true

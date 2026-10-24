@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  /* Light (default): warm stone surfaces, forest-green actions, charcoal text, one sand accent.
+     Legacy names (navy-*, amber-*) hold these neutral/green values; the dark theme overrides them below.
+     navy-900 = strongest text, navy-950 = text on a filled action, amber-500 = primary action fill. */
+  --color-navy-950: #ffffff;
+  --color-navy-900: #252824;
+  --color-navy-800: #3a3e39;
+  --color-navy-700: #5f645e;
+  --color-navy-100: #e0dccf;
+  --color-navy-50: #edeae1;
+
+  --color-amber-600: #285d46;
+  --color-amber-500: #285d46;
+  --color-amber-400: #1f4a38;
+  --color-amber-100: #e3ebe5;
+  --color-amber-50: #eef3ef;
+
+  --color-paper: #f5f3ed;
+  --color-surface: #edeae1;
+  --color-card: #ffffff;
+  --color-elevated: #e6e2d6;
+  --color-line: #e0dccf;
+  --color-ink: #252824;
+  --color-body: #3a3e39;
+  --color-muted: #5f645e;
+  --color-faint: #8a8e86;
+  --color-primary: #285d46;
+  --color-primary-hover: #1f4a38;
+  --color-on-primary: #ffffff;
+  --color-brand: #285d46;
+
+  --color-ok: #2e7d55;
+  --color-ok-bg: #e1f0e7;
+  --color-bad: #b3261e;
+  --color-bad-bg: #fbe9e7;
+  --color-warn: #8a5a00;
+  --color-warn-bg: #f6ebd0;
+  --color-info: #1b5fb5;
+  --color-info-bg: #e6f0fb;
+
+  --font-sans: "Asap Sharp", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+  --radius-card: 6px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+  --radius-2xl: 7px;
+  --color-brand-link: #285d46;
+  --shadow-card: 0 1px 2px rgb(37 40 36 / 0.08);
+}
+
+:root { --hero-overlay: rgba(245, 243, 237, 0.9); --skel-a: #e8e4d8; --skel-b: #f1eee4; color-scheme: light; }
+
+/* Dark theme: same names, charcoal values (toggled by the button in the header; see ThemeToggle) */
+:root[data-theme='dark'] {
+  --color-navy-950: #0f1a14;
+  --color-navy-900: #f4f3ee;
+  --color-navy-800: #e2e1da;
+  --color-navy-700: #a9ada5;
+  --color-navy-100: #2c302b;
+  --color-navy-50: #222622;
+  --color-amber-600: #8fc4a6;
+  --color-amber-500: #8fc4a6;
+  --color-amber-400: #a8d5bc;
+  --color-amber-100: #1c2a22;
+  --color-amber-50: #171f1a;
+  --color-paper: #0f1210;
+  --color-surface: #141714;
+  --color-card: #181c19;
+  --color-elevated: #222622;
+  --color-line: #2c302b;
+  --color-ink: #f4f3ee;
+  --color-body: #cfd1ca;
+  --color-muted: #a9ada5;
+  --color-faint: #7c817a;
+  --color-primary: #8fc4a6;
+  --color-primary-hover: #a8d5bc;
+  --color-on-primary: #0f1a14;
+  --color-brand: #fea910;
+  --color-ok: #73d6a0;
+  --color-ok-bg: #10261b;
+  --color-bad: #ff7777;
+  --color-bad-bg: #2a1214;
+  --color-warn: #e6b95c;
+  --color-warn-bg: #2a2210;
+  --color-info: #80bfff;
+  --color-info-bg: #10202f;
+  --color-brand-link: #8fc4a6;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --hero-overlay: rgba(15, 18, 16, 0.92);
+  --skel-a: #181c19; --skel-b: #222622;
+  color-scheme: dark;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+:focus-visible { outline: 3px solid var(--color-amber-500); outline-offset: 2px; border-radius: 4px; }
+dialog { border: none; padding: 0; background: transparent; max-width: 100vw; max-height: 100dvh; }
+dialog::backdrop { background: rgb(0 0 0 / 0.7); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--skel-a) 25%, var(--skel-b) 50%, var(--skel-a) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 8px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------------------------------------------------------------- visiting card (90 x 55 mm) */
+.print-card {
+  position: relative;
+  width: 90mm;
+  height: 55mm;
+  flex: none;
+  overflow: hidden;
+  background: #fff;
+  color: #0f1b33;
+  border: 1px solid var(--color-line);
+  border-radius: 3mm;
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-sans);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.print-card__bar { background: #0f1b33; color: #fff; height: 8mm; display: flex; align-items: center; padding: 0 5mm; }
+.print-card__brand { font-size: 10pt; font-weight: 800; letter-spacing: 0.02em; }
+.print-card__brand b { color: #f59e0b; }
+.print-card__body { display: flex; height: 47mm; padding: 3mm 3mm 3mm 5mm; gap: 3mm; align-items: center; }
+.print-card__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1mm; }
+.print-card__name { font-size: 12pt; font-weight: 800; line-height: 1.15; margin: 0; overflow-wrap: anywhere; }
+.print-card__prof { font-size: 8.5pt; font-weight: 700; color: #b45309; margin: 0; }
+.print-card__scan { font-size: 7.5pt; margin: 1.5mm 0 0; line-height: 1.25; }
+.print-card__phone { font-size: 8.5pt; font-weight: 700; margin: 0; }
+.print-card__url { font-size: 6pt; margin: 0; color: #566079; overflow-wrap: anywhere; }
+.print-card__qr { width: 34mm; height: 34mm; flex: none; background: #fff; }
+
+@page { size: 90mm 55mm; margin: 0; }
+@media print {
+  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  /* hide everything (navigation, buttons, other cards) except the visiting card */
+  #root { height: 0 !important; overflow: hidden !important; }   /* no blank extra pages */
+  body * { visibility: hidden !important; }
+  .print-card, .print-card * { visibility: visible !important; }
+  .print-card {
+    position: fixed !important; left: 0; top: 0; margin: 0 !important;
+    border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  /* only the first card on the page prints */
+  .print-card ~ .print-card { display: none !important; }
+}
+
+/* hourglass flips half a turn, rests, repeats */
+@keyframes lc-flip { 0%, 30% { transform: rotate(0deg); } 80%, 100% { transform: rotate(180deg); } }
+.lc-flip { animation: lc-flip 1.6s cubic-bezier(.65, 0, .35, 1) infinite; }
+@media (prefers-reduced-motion: reduce) { .lc-flip { animation: none; } }
